@@ -3,6 +3,7 @@ import java.lang.management.ThreadMXBean;
 import java.io.*;
 import java.util.Random;
 
+
 public class tSGreedy {
 public static int T = 10;
     public static void main( String[] args) {
@@ -10,6 +11,7 @@ public static int T = 10;
         int [][] costMatrix = new int[T][T];
         int[][] EcMatrix = new int[T][T];
         TspBrute Brute = new TspBrute();
+        TspAntColony Ant = new TspAntColony();
         int [] numArray = new int [T];
         for(int i = 0; i < T; i++)
         {
@@ -24,6 +26,7 @@ public static int T = 10;
         Brute.permute(costMatrix,numArray,1,T-1);
         System.out.print("the smallest cost is "+ Brute.shortest + "\n");
         tSPGreedy(costMatrix);
+        Ant.TspAnt(costMatrix);
 
 
 
