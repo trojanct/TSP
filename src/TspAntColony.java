@@ -84,6 +84,7 @@ public class TspAntColony {
             if( minPathCostSoFar == miniCostLastTime)
             {
                 StaySame++;
+                System.out.print(StaySame + " ");
             }
             else
             {

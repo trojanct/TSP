@@ -1,10 +1,11 @@
 public class TspBrute {
 
 
-    static  public int shortest = 100;
+    static  public int shortest = 10000;
     static  public int T = 10;
     public static void  permute(int CostMatrix[][], int array[], int l, int r )
     {
+
         int temp;
         int temp2 = 0;
         int addUP = 0;

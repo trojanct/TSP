@@ -4,12 +4,14 @@ import java.io.*;
 import java.util.Random;
 
 
+
 public class tSGreedy {
 public static int T = 10;
     public static void main( String[] args) {
 
         int [][] costMatrix = new int[T][T];
         int[][] EcMatrix = new int[T][T];
+        int[][] CegMatrix = new int[T][T];
         TspBrute Brute = new TspBrute();
         TspAntColony Ant = new TspAntColony();
         int [] numArray = new int [T];
@@ -23,10 +25,17 @@ public static int T = 10;
 
         generateRandomCostMatrix(costMatrix);
         GenerateRandomEuclideanCostMatrix(EcMatrix);
-        Brute.permute(costMatrix,numArray,1,T-1);
-        System.out.print("the smallest cost is "+ Brute.shortest + "\n");
+        GenerateRandomCircularGraphCostMatrix(CegMatrix);
+
+
         tSPGreedy(costMatrix);
         Ant.TspAnt(costMatrix);
+        //Brute.permute(costMatrix,numArray,1,T-1);
+        //System.out.print("the smallest cost is "+ Brute.shortest + "\n");
+        tSPGreedy(EcMatrix);
+        Ant.TspAnt(EcMatrix);
+        Brute.permute(EcMatrix,numArray,1,T-1);
+        System.out.print("the smallest cost for Brute is "+ Brute.shortest + "\n");
 
 
 
@@ -155,9 +164,46 @@ public static int T = 10;
 
     }
 
+    public static void GenerateRandomCircularGraphCostMatrix(int CgMatrix[][]) {
+        double stepangle;
+        stepangle = 2 * Math.PI / T;
+        double[] x = new double[T];
+        double[] y = new double[T];
+        double temp = 0;
+        int marker = 0;
+        double radius = 100;
+
+        for (int s = 0; s < T; s++) {
+            x[s] = radius * Math.sin(s * stepangle);
+            System.out.print(x[s] + " ");
+            y[s] = radius * Math.cos(s * stepangle);
+            System.out.print(y[s] + "  \n");
+        }
 
 
+        for (int i = 0; i < T; i++) {
+            for (int j = marker; j < T; j++) {
+                if (i == j) {
+                    CgMatrix[i][j] = 0;
+                } else {
+                    temp = (Math.pow((x[i] - x[j]), 2) + Math.pow((y[i] - y[j]), 2));
+                    temp = Math.pow(temp, .5);
+                    CgMatrix[i][j] =  (int) temp;
+                    CgMatrix[j][i] = CgMatrix[i][j];
+                }
+
+            }
+        }
+            marker++;
+            for ( int i = 0; i < T; i++) {
+                System.out.print("\n");
+                for (int j = 0; j < T; j++) {
+                    System.out.print(CgMatrix[i][j] + " ");
+                }
+            }
+            System.out.print("\n\n");
 
 
+        }
 
 }
