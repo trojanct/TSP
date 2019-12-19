@@ -7,12 +7,12 @@ public class TspAntColony {
     static public int T = 10;
     public static void  TspAnt(int Dist[][])
     {
-        double PheromoneFactor = 1;
+        double PheromoneFactor = 2;
         double DecayFactor = .9;
         int maxUnchangedTimeSteps = 20;
         int N = T;
         //ants
-        int M = 5; // ants
+        int M = 10; // ants
         double [][] Phero = new double[T][T];
         double [][] NewPhero = new double[T][T];
         int [] Visited = new int[T];
@@ -65,7 +65,9 @@ public class TspAntColony {
                 pathCost = pathCost + Dist[h][0];
                 if (pathCost < minPathCostSoFar || minPathCostSoFar == -1) {
                     minPathCostSoFar = pathCost;
-                    miniPath = Path;
+                    for(int a = 0; a < T; a++) {
+                        miniPath[a] = Path[a];
+                    }
                 }
                 for (step = 0; step < N ; step++) {
                     k = Path[step];
@@ -84,7 +86,7 @@ public class TspAntColony {
             if( minPathCostSoFar == miniCostLastTime)
             {
                 StaySame++;
-                System.out.print(StaySame + " ");
+                //System.out.print(StaySame + " ");
             }
             else
             {
@@ -96,7 +98,7 @@ public class TspAntColony {
         {
             System.out.print(miniPath[i] + " ");
         }
-        System.out.print("\n"+"ant lowest found " +miniCostLastTime + " \n");
+        System.out.print("0\n"+"ant lowest found " +miniCostLastTime + " \n");
 
     }
 

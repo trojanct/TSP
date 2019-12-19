@@ -15,6 +15,7 @@ public static int T = 10;
         TspBrute Brute = new TspBrute();
         TspAntColony Ant = new TspAntColony();
         int [] numArray = new int [T];
+        int [] bruteArray = new int [T];
         for(int i = 0; i < T; i++)
         {
 
@@ -30,12 +31,30 @@ public static int T = 10;
 
         tSPGreedy(costMatrix);
         Ant.TspAnt(costMatrix);
-        //Brute.permute(costMatrix,numArray,1,T-1);
-        //System.out.print("the smallest cost is "+ Brute.shortest + "\n");
+        Brute.TspBrute(costMatrix,numArray,1,T-1);
+        System.out.print("the smallest cost is "+ Brute.shortest + "\n");
+        Brute.ResetShort();
+
+        System.out.print("\n");
+
+
         tSPGreedy(EcMatrix);
         Ant.TspAnt(EcMatrix);
-        Brute.permute(EcMatrix,numArray,1,T-1);
+        Brute.TspBrute(EcMatrix,numArray,1,T-1);
         System.out.print("the smallest cost for Brute is "+ Brute.shortest + "\n");
+        Brute.ResetShort();
+
+        System.out.print("\n");
+
+        tSPGreedy(CegMatrix);
+        Ant.TspAnt(CegMatrix);
+        Brute.TspBrute(CegMatrix,numArray,1,T-1);
+        System.out.print("the smallest cost for Brute is "+ Brute.shortest + "\n");
+
+
+
+
+
 
 
 
@@ -71,6 +90,7 @@ public static int T = 10;
             total ++;
             g = place;
         }
+        System.out.print("0 ");
         for(int b = 0; b < T; b++ )
         {
             System.out.print(path[b] + " ");
@@ -78,7 +98,7 @@ public static int T = 10;
             temp = path[b];
 
         }
-        System.out.print(greedytotal + "\n");
+        System.out.print("\n The total for greed is " + greedytotal + "\n");
 
 
 
@@ -99,7 +119,7 @@ public static int T = 10;
                 }
                 else
                 {
-                    costArray[i][j] = rand.nextInt(10)+1;
+                    costArray[i][j] = rand.nextInt(20)+1;
                     costArray[j][i] = costArray[i][j];
                 }
 
@@ -172,6 +192,7 @@ public static int T = 10;
         double temp = 0;
         int marker = 0;
         double radius = 100;
+        int[] array = {0,5,2,9,8,7,6,1,3,4};
 
         for (int s = 0; s < T; s++) {
             x[s] = radius * Math.sin(s * stepangle);
@@ -193,8 +214,9 @@ public static int T = 10;
                 }
 
             }
-        }
             marker++;
+        }
+
             for ( int i = 0; i < T; i++) {
                 System.out.print("\n");
                 for (int j = 0; j < T; j++) {
@@ -205,5 +227,14 @@ public static int T = 10;
 
 
         }
+    public static void Randomarray(int array[])
+    {
+
+
+        int [] Visited = new int [T];
+        Visited[0] = 1;
+        array[0] = 0;
+
+    }
 
 }
