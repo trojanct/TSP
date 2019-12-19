@@ -190,6 +190,7 @@ public class tSGreedy {
             total ++;
             g = place;
         }
+        //prints out chartand total
         //System.out.print("0 ");
         for(int b = 0; b < N; b++ )
         {
